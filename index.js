@@ -28,7 +28,18 @@ console.log(result);
 
 // eager evaluation
 // always return whole value - as entire array, entire object etc;
-Promise.resolve(true)
+let flag = true;
+
+// annonymous function, fat arrow, scope behviour in fat arrow vs normal function ?
+let p1 = () =>
+  new Promise((resolve, rej) => {
+    setTimeout(() => {
+      if (flag) resolve(true);
+      else rej(false);
+    }, 5 * 1000);
+  });
+
+p1()
   .then((d) => {
     console.log('first then', d);
     // throw new Error('purposly failed');
